@@ -1,0 +1,73 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "type" : "object",
+  "properties" : {
+    "gatewayStates" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "transmissionPower" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "isRunning" : {
+      "type" : "boolean"
+    },
+    "moteStates" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "energyLevel" : {
+            "type" : "integer"
+          },
+          "highestReceivedSignal" : {
+            "type" : "number"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "movementSpeed" : {
+            "type" : "number"
+          },
+          "path" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "latitude" : {
+                  "type" : "number"
+                },
+                "longitude" : {
+                  "type" : "number"
+                }
+              }
+            }
+          },
+          "samplingRate" : {
+            "type" : "integer"
+          },
+          "sensors" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "SOOT", "OZONE", "CARBON_DIOXIDE", "PARTICULATE_MATTER" ]
+            }
+          },
+          "shortestDistanceToGateway" : {
+            "type" : "number"
+          },
+          "startOffSet" : {
+            "type" : "integer"
+          },
+          "transmissionPower" : {
+            "type" : "integer"
+          }
+        }
+      }
+    }
+  }
+}

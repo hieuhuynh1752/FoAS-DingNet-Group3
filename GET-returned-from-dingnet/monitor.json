@@ -1,0 +1,81 @@
+{
+    "isRunning": true,
+    "moteStates": [
+        {
+            "id": 0,
+            "transmissionPower": 10,
+            "sensors": [],
+            "energyLevel": 0,
+            "path": [],
+            "samplingRate": 10,
+            "movementSpeed": 0.5,
+            "startOffSet": 0,
+            "shortestDistanceToGateway": 301.21918929576844,
+            "highestReceivedSignal": -58.81577605168415,
+            "eui": -7680031478269703000,
+            "xpos": 523,
+            "ypos": 1187,
+            "sf": 12
+        },
+        {
+            "id": 1,
+            "transmissionPower": 14,
+            "sensors": [],
+            "energyLevel": 0,
+            "path": [],
+            "samplingRate": 10,
+            "movementSpeed": 0.5,
+            "startOffSet": 4,
+            "eui": -4199430698000584700,
+            "xpos": 1104,
+            "ypos": 1004,
+            "sf": 12
+        },
+        {
+            "id": 2,
+            "transmissionPower": 0,
+            "sensors": [],
+            "energyLevel": 0,
+            "path": [],
+            "samplingRate": 10,
+            "movementSpeed": 0.5,
+            "startOffSet": 1,
+            "shortestDistanceToGateway": 301.21918929576844,
+            "highestReceivedSignal": -58.81577605168415,
+            "eui": 7355793421521619000,
+            "xpos": 857,
+            "ypos": 846,
+            "sf": 12
+        }
+    ],
+    "gatewayStates": [
+        {
+            "transmissionPower": 14,
+            "eui": 1196315242943360000,
+            "xpos": 617,
+            "ypos": 617,
+            "sf": 12
+        },
+        {
+            "transmissionPower": 14,
+            "eui": -3093613356564955000,
+            "xpos": 340,
+            "ypos": 340,
+            "sf": 12
+        },
+        {
+            "transmissionPower": 14,
+            "eui": 6191197418551688000,
+            "xpos": 344,
+            "ypos": 344,
+            "sf": 12
+        },
+        {
+            "transmissionPower": 14,
+            "eui": -6448275561937648000,
+            "xpos": 227,
+            "ypos": 227,
+            "sf": 12
+        }
+    ]
+}

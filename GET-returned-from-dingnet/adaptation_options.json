@@ -1,0 +1,31 @@
+{
+    "items": [
+        {
+            "name": "power",
+            "description": "Determines the energy consumed by the mote for communication.",
+            "minValue": -1.0,
+            "maxValue": 15.0
+        },
+        {
+            "name": "spreading_factor",
+            "description": "Determines the duration of the communication",
+            "minValue": 0.0,
+            "maxValue": 12.0
+        },
+        {
+            "name": "sampling_rate",
+            "description": "The sampling rate of the sensors of the mote.",
+            "minValue": 0.0
+        },
+        {
+            "name": "movement_speed",
+            "description": "The movement speed of the mote.",
+            "minValue": 0.0
+        },
+        {
+            "name": "energy_level",
+            "description": "The energy level of the mote.",
+            "minValue": 0.0
+        }
+    ]
+}
