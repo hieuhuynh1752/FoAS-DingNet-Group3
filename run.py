@@ -1,13 +1,11 @@
-from UPISAS.strategies.swim_reactive_strategy import ReactiveAdaptationManager
-from UPISAS.exemplar import Exemplar
-from UPISAS.exemplars.swim import SWIM
-import signal
+from UPISAS.strategies.dingnet_reactive_strategy import ReactiveAdaptationManager
+from UPISAS.exemplars.dingnet import DINGNET
 import sys
 import time
 
 if __name__ == '__main__':
-    
-    exemplar = SWIM(auto_start=True)
+
+    exemplar = DINGNET(auto_start=True)
     time.sleep(3)
     exemplar.start_run()
     time.sleep(3)
@@ -25,9 +23,10 @@ if __name__ == '__main__':
             if strategy.analyze():
                 if strategy.plan():
                     strategy.execute()
-            
+
     except (Exception, KeyboardInterrupt) as e:
-        print(str(e))
+        print("Exception log:\n")
+        print(e)
         input("something went wrong")
         exemplar.stop_container()
         sys.exit(0)
