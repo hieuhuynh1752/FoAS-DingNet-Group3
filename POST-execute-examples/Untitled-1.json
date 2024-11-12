@@ -1,0 +1,13 @@
+{
+    "items": [
+        {
+            "id": 0,
+            "adaptations": [
+                {
+                    "name": "power",
+                    "value": 8
+                }
+            ]
+        }
+    ]
+}
