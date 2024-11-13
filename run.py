@@ -6,7 +6,7 @@ import time
 if __name__ == '__main__':
 
     exemplar = DINGNET(auto_start=True)
-    time.sleep(3)
+    time.sleep(30)
     exemplar.start_run()
     time.sleep(3)
 

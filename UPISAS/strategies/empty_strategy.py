@@ -7,4 +7,17 @@ class EmptyStrategy(Strategy):
         return True
 
     def plan(self):
+        self.knowledge.plan_data = {
+            "items": [
+                {
+                    'id': 0,
+                    'adaptations': [
+                        {
+                            'name': 'sampling_rate',
+                            'value': 2
+                        }
+                    ]
+                }
+            ]
+        }
         return True
