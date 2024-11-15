@@ -3,8 +3,8 @@ from UPISAS import validate_schema
 
 #This is a port of the ReactiveAdaptationManager originally published alongside SWIM.
 class ReactiveAdaptationManager(Strategy):
-    SIGNAL_THRESHOLD_LOW = -48  # Example value in dBm for lower signal threshold
-    SIGNAL_THRESHOLD_HIGH = -42  # Example value in dBm for higher signal threshold
+    SIGNAL_THRESHOLD_LOW = -54  # Example value in dBm for lower signal threshold
+    SIGNAL_THRESHOLD_HIGH = -58  # Example value in dBm for higher signal threshold
     POWER_INCREMENT = 1  # Step size for increasing power
     PACKET_LOSS_THRESHOLD = 0
 
@@ -22,7 +22,7 @@ class ReactiveAdaptationManager(Strategy):
 
         # Variables to store previous values for comparison
         self.previous_signal_strength = None
-        self.previous_packets_lost = None
+        self.previous_packet_loss = None
 
     def monitor(self, endpoint_suffix="monitor", with_validation=True, verbose=False):
         """Use the inherited monitor method to collect and store fresh data each time."""
@@ -70,7 +70,8 @@ class ReactiveAdaptationManager(Strategy):
         # Update monitored data with the relevant fields of the first mote
         self.monitored["current_mote"] = {
             "highest_received_signal": first_mote.get("highestReceivedSignal", -100),
-            "packets_lost": first_mote.get("packetsLost", 0)
+            "packet_loss": first_mote.get("packetLoss", 0),
+            "power_setting": first_mote.get("transmissionPower", 0)
         }
 
         if verbose:
@@ -81,20 +82,20 @@ class ReactiveAdaptationManager(Strategy):
         print("[Analyze] Starting analysis phase...")
         mote_data = self.monitored["current_mote"]
         current_signal_strength = mote_data.get("highest_received_signal", -100)
-        current_packets_lost = mote_data.get("packets_lost", 0)
+        current_packet_loss = mote_data.get("packet_loss", 0)
 
         # Debug: Print current values
-        print(f"[Analyze] Current Signal Strength: {current_signal_strength}, Current Packets Lost: {current_packets_lost}")
+        print(f"[Analyze] Current Signal Strength: {current_signal_strength}, Current Packet Loss Rate: {current_packet_loss}")
 
         # Set initial values if None
         if self.previous_signal_strength is None:
             self.previous_signal_strength = current_signal_strength
-        if self.previous_packets_lost is None:
-            self.previous_packets_lost = current_packets_lost
+        if self.previous_packet_loss is None:
+            self.previous_packet_loss = current_packet_loss
 
         # Compare current values with previous values
         signal_strength_changed = current_signal_strength != self.previous_signal_strength
-        packet_loss_detected = current_packets_lost > self.previous_packets_lost
+        packet_loss_detected = current_packet_loss > self.previous_packet_loss
 
         # Update the analysis results
         self.analysis.clear()
@@ -108,7 +109,7 @@ class ReactiveAdaptationManager(Strategy):
 
         # Store current values as previous values for the next cycle
         self.previous_signal_strength = current_signal_strength
-        self.previous_packets_lost = current_packets_lost
+        self.previous_packet_loss = current_packet_loss
 
         # Return True if any adaptation is needed
         return any(self.analysis.values())
@@ -118,12 +119,15 @@ class ReactiveAdaptationManager(Strategy):
         print("[Plan] Starting planning phase...")
         adaptations = []
 
+        mote_data = self.monitored["current_mote"]
+        current_power_setting = mote_data.get("power_setting", 0)
+
         # Adjust transmission power
         if self.analysis["increase_power"]:
-            adaptations.append({"name": "power_setting", "value": self.POWER_INCREMENT})
+            adaptations.append({"name": "power", "value": current_power_setting + self.POWER_INCREMENT})
             print(f"[Plan] Planned to increase power by {self.POWER_INCREMENT}")
         elif self.analysis["decrease_power"]:
-            adaptations.append({"name": "power_setting", "value": -self.POWER_INCREMENT})
+            adaptations.append({"name": "power", "value": current_power_setting - self.POWER_INCREMENT})
             print(f"[Plan] Planned to decrease power by {self.POWER_INCREMENT}")
 
         # If packet loss is detected, consider reducing sampling rate or taking other measures
