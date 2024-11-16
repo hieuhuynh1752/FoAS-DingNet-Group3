@@ -139,7 +139,7 @@ class RunnerConfig:
 
         output.console_log("Config.populate_run_data() called!")
 
-        avg_packet_loss = sum(self.packetLossList)/len(self.packetLossList)
+        avg_packet_loss = sum(self.packetLossList)/len(self.packetLossList)*100
         avg_energy_consumption = sum(self.energyConsumptionList)
 
         self.powerList = []
@@ -147,7 +147,7 @@ class RunnerConfig:
         self.energyConsumptionList = []
 
         return {
-            "avg_packet_loss": avg_packet_loss,
+            "avg_packet_loss_percentage": avg_packet_loss,
             "total_energy_consumption_mJ": avg_energy_consumption
         }
 
