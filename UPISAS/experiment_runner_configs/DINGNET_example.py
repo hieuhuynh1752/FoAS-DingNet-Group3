@@ -66,9 +66,10 @@ class RunnerConfig:
     def create_run_table_model(self) -> RunTableModel:
         """Create and return the run_table model here. A run_table is a List (rows) of tuples (columns),
         representing each run performed"""
-        factor1 = FactorModel("run", ["1","2","3","4","5","6","7","8","9","10"])
+        factor1 = FactorModel("adaptation_mode", ["original"])
         self.run_table_model = RunTableModel(
             factors=[factor1],
+            repetitions = 30,
             data_columns=['avg_packet_loss', 'avg_energy_consumption(mJ)'],
         )
         return self.run_table_model
