@@ -70,7 +70,7 @@ class RunnerConfig:
         self.run_table_model = RunTableModel(
             factors=[factor1],
             repetitions = 30,
-            data_columns=['avg_packet_loss', 'avg_energy_consumption(mJ)'],
+            data_columns=['avg_packet_loss', 'total_energy_consumption_mJ'],
         )
         return self.run_table_model
 
@@ -148,7 +148,7 @@ class RunnerConfig:
 
         return {
             "avg_packet_loss": avg_packet_loss,
-            "avg_energy_consumption(mJ)": avg_energy_consumption
+            "total_energy_consumption_mJ": avg_energy_consumption
         }
 
     def after_experiment(self) -> None:

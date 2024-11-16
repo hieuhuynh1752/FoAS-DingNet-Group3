@@ -1,4 +1,4 @@
-__run_id,__done,adaptation_mode,avg_packet_loss,avg_energy_consumption(mJ)
+__run_id,__done,adaptation_mode,avg_packet_loss,total_energy_consumption_mJ
 run_0_repetition_0,DONE,provoost,0.14916936673901418,7256.935931528007
 run_0_repetition_1,DONE,provoost,0.15260356032798722,7479.797633738429
 run_0_repetition_2,DONE,provoost,0.15072333111319838,7078.353204257438
