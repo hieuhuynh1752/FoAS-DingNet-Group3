@@ -1,4 +1,4 @@
-from UPISAS.strategies.dingnet_reactive_strategy import ReactiveAdaptationManager
+from UPISAS.strategies.dingnet_group3_reactive_strategy import ReactiveAdaptationManager
 from UPISAS.exemplars.dingnet import DINGNET
 import sys
 import time
