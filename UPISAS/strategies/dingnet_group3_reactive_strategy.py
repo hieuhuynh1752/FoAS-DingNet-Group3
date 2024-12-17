@@ -12,10 +12,10 @@ class ReactiveAdaptationManager(Strategy):
     POWER_LARGE = 2  # Step size large for power
     SPREADING_FACTOR_CHANGE = 1 #Step size for spreading factor
 
-    PACKET_LOSS_THRESHOLD_LOWEST = 0.04
-    PACKET_LOSS_THRESHOLD_LOW = 0.06
-    PACKET_LOSS_THRESHOLD_HIGH = 0.08
-    PACKET_LOSS_THRESHOLD_HIGHEST = 0.1
+    PACKET_LOSS_THRESHOLD_LOWEST = 0.1
+    PACKET_LOSS_THRESHOLD_LOW = 0.14
+    PACKET_LOSS_THRESHOLD_HIGH = 0.17
+    PACKET_LOSS_THRESHOLD_HIGHEST = 0.2
 
     def __init__(self, exemplar):
         super().__init__(exemplar)
@@ -191,6 +191,10 @@ class ReactiveAdaptationManager(Strategy):
     def execute(self, adaptation=None, endpoint_suffix="execute", with_validation=True):
         """Use the inherited execute method to apply the adaptation for the first mote."""
         print("[Execute] Starting execution phase...")
+        if adaptation != None:
+            super().execute(adaptation)
+            print(f"[Execute] Direct adaptation applied: {adaptation}")
+
         if not self.plan_data or not self.plan_data.get("items"):
             print("[Execute] No adaptation plan to execute.")
             return

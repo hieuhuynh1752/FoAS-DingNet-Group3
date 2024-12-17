@@ -13,8 +13,7 @@ from os.path import dirname, realpath
 import time
 import statistics
 
-from UPISAS.strategies.dingnet_group3_reactive_strategy import ReactiveAdaptationManager as Group3ReactiveAdaptationManager
-from UPISAS.strategies.dingnet_provoost_reactive_strategy import ReactiveAdaptationManager as ProvoostReactiveAdaptationManager
+from UPISAS.strategies.dingnet_provoost_reactive_strategy import ReactiveAdaptationManager
 from UPISAS.exemplars.dingnet import DINGNET
 
 
@@ -67,10 +66,10 @@ class RunnerConfig:
     def create_run_table_model(self) -> RunTableModel:
         """Create and return the run_table model here. A run_table is a List (rows) of tuples (columns),
         representing each run performed"""
-        factor1 = FactorModel("adaptation_mode", ["group3", "provoost"])
+        factor1 = FactorModel("adaptation_mode", ["provoost"])
         self.run_table_model = RunTableModel(
             factors=[factor1],
-            repetitions = 30,
+            repetitions = 10,
             data_columns=['avg_packet_loss_percentage', 'total_energy_consumption_mJ'],
         )
         return self.run_table_model
@@ -85,21 +84,16 @@ class RunnerConfig:
         """Perform any activity required before starting a run.
         No context is available here as the run is not yet active (BEFORE RUN)"""
         self.exemplar = DINGNET(auto_start=True)
+        self.strategy = ReactiveAdaptationManager(self.exemplar)
         output.console_log("Config.before_run() called!")
 
     def start_run(self, context: RunnerContext) -> None:
         """Perform any activity required for starting the run here.
         For example, starting the target system to measure.
         Activities after starting the run should also be performed here."""
-        if context.run_variation["adaptation_mode"] == "group3":
-            self.strategy = Group3ReactiveAdaptationManager(self.exemplar)
-        else:
-            self.strategy = ProvoostReactiveAdaptationManager(self.exemplar)
-
         time.sleep(20)
         self.exemplar.start_run()
         time.sleep(5)
-        # Reset power and spreading-factor to 7
         self.strategy.execute(adaptation=
             {
                 "items":
@@ -128,7 +122,7 @@ class RunnerConfig:
 
     def interact(self, context: RunnerContext) -> None:
         """Perform any interaction with the running target system here, or block here until the target finishes."""
-        for x in range(100):
+        for x in range(10):
             self.strategy.get_monitor_schema()
             self.strategy.get_adaptation_options_schema()
             self.strategy.get_execute_schema()

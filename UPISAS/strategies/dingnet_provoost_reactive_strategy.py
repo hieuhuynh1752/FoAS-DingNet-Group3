@@ -153,6 +153,10 @@ class ReactiveAdaptationManager(Strategy):
     def execute(self, adaptation=None, endpoint_suffix="execute", with_validation=True):
         """Use the inherited execute method to apply the adaptation for the first mote."""
         print("[Execute] Starting execution phase...")
+        if adaptation != None:
+            super().execute(adaptation)
+            print(f"[Execute] Direct adaptation applied: {adaptation}")
+
         if not self.plan_data or not self.plan_data.get("items"):
             print("[Execute] No adaptation plan to execute.")
             return
